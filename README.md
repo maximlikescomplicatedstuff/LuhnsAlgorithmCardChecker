@@ -1,0 +1,2 @@
+# LuhnsAlgorithmCardChecker
+A simple multi-threaded program that checks for card numbers. ** this cannot be used to steal money from anyone or anything as i would need a security code and expiry date **
