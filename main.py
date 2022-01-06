@@ -53,7 +53,10 @@ def thread_function(name):
     #defines the start and endpoint of this particular thread by getting it from the array using the index variable
     lines = f.read().splitlines()
     lastline = lines[-2]
-    startN = int(lastline)
+    try:
+        startN = int(lastline)
+    except:
+        startN = int(ave1[index])
     endN = int(ave2[index])
     logging.info("Thread {0}: Start: {1}".format(index,startN))
     logging.info("Thread {0}: End: {1}".format(index,endN))
@@ -63,20 +66,6 @@ def thread_function(name):
     for cardNoint, _ in enumerate(range(startN,endN), start=startN):
         cardNo = str(cardNoint)
         if (checkLuhn(cardNo)):
-            counter2 += 1
-            if counter2 < 500000:
-                with open("cards{}.txt".format(index), "r") as f:
-                    with open("cardsmain.txt", "a+") as f1:
-                        for line in f:
-                            f1.write(line)
-                lines_seen = set()
-                outfile = open("main.txt", "a+")
-                for line in open("cardsmain.txt", "r"):
-                    if line not in lines_seen:
-                        outfile.write(line)
-                        lines_seen.add(line)
-                outfile.close()
-                lines_seen = set()
             counter += 1
             if counter < 10000:
                 cardNoArr.append(cardNo)
@@ -84,8 +73,6 @@ def thread_function(name):
             else:
                 cardfile.write(listtostring(cardNoArr))
                 cardNoArr = []
-            #writes card number to file if it succeeds the Luhn check
-            cardfile.write(cardNo + "\n")
     #logs when thread finishes
     logging.info("Thread %s: finished",index)
 
