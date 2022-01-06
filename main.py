@@ -47,10 +47,17 @@ def thread_function(name):
     #defines what ranges to use for each thread
     ave1 = [4000000000000000,4125000000000000,4250000000000000,4375000000000000,4500000000000000,4625000000000000,4750000000000000,4875000000000000]
     ave2 = [4125000000000000,4250000000000000,4375000000000000,4500000000000000,4625000000000000,4750000000000000,4875000000000000,5000000000000000]
-
-    f = open("cards{}.txt".format(index), "r")
+    def fiel():
+        try:
+            f = open("cards{}.txt".format(index), "r")
+        except:
+            f = open("cards{}.txt".format(index), "a+")
+            f.close()
+            fiel()
+    
 
     #defines the start and endpoint of this particular thread by getting it from the array using the index variable
+    feil()
     lines = f.read().splitlines()
     lastline = lines[-2]
     try:
